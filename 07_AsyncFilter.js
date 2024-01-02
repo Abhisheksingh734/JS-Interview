@@ -27,7 +27,7 @@ const asyncFilter = async (arr, fn) => {
         });
       });
       if (result) {
-        output.push(result);
+        output.push(current);
       }
     } catch (error) {
       throw error;
@@ -41,7 +41,7 @@ const numPromise = asyncFilter([1, 2, 2, 3, 4, 5], (num, callback) => {
     num = num * 2;
     console.log(num);
 
-    if (num === 4) {
+    if (num === 7) {
       //break condition
       callback(true);
     } else {
