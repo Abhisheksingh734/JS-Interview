@@ -2,11 +2,11 @@ let student = {
   name: "Abhishek",
 };
 
-let printName = function () {
-  console.log(this.name);
+let printName = function (state, age) {
+  console.log(this.name + ", " + state + ", " + age);
 };
 
-let printMyName = printName.bind(student);
+let printMyName = printName.bind(student, "Up", 20);
 printMyName();
 
 //we want same functionality of bind method in myBind()
@@ -18,12 +18,13 @@ let student2 = {
 // first we make myBind method accessible to everyObj by setting it to func prototype
 Function.prototype.myBind = function (...args) {
   let obj = this;
-
+  let params = args.slice(1);
   //it returns a function that executes printName as it invokes
+  //use apply for multiple args
   return function () {
-    obj.call(args[0]);
+    obj.apply(args[0], params);
   };
 };
 
-let printMyName2 = printName.myBind(student2);
+let printMyName2 = printName.myBind(student2, "Delhi", 20);
 printMyName2();
